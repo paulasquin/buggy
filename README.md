@@ -9,13 +9,15 @@ It open a tkinter interface, allowing the user to freeze topics.
 cd ~
 mkdir catkin_ws_buggy
 cd catkin_ws_buggy
-git clone https://paulasquinawabot@bitbucket.org/awabot/buggy.git
+git clone https://paulasquinawabot@bitbucket.org/awabot/buggy.git .
 catkin_make
 ```
 ## Usage
 ```
 rosrun buggy buggy_node.py
 ```
+You have to remap your application to the /buggy/* topics.
+
  ## Preview
 
 ![Buggy GUI](doc/buggy_interface.png?raw=true "Buggy GUI")
