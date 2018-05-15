@@ -121,6 +121,8 @@ def graphicInterface():
 	lesButtons = []
 	# Create Tk interface
 	window.title('Buggy - block your topics')
+	window.option_add("*Font", "courier 16")
+
 	FrameTopics = LabelFrame(window, text='Freeze '+ buggyPrefix, borderwidth=1)
 	FrameTopics.grid(row=1, sticky=W, padx=5, pady=5)
 	
@@ -139,7 +141,6 @@ def graphicInterface():
 
 
 def main():
-	
 	graphicInterface()
 
 
