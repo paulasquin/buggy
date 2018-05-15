@@ -9,7 +9,7 @@ It open a tkinter interface, allowing the user to freeze topics.
 cd ~
 mkdir catkin_ws_buggy
 cd catkin_ws_buggy
-git clone https://paulasquinawabot@bitbucket.org/awabot/buggy.git .
+git clone https://bitbucket.org/awabot/buggy/src/master/ .
 catkin_make
 ```
 ## Usage
