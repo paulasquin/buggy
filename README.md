@@ -1,7 +1,10 @@
-# buggy
+# Buggy
 
 Buggy subscribes to every available rostopic and republish those topics as /buggy/*.
 It open a tkinter interface, allowing the user to freeze topics.
+
+Project by Paul Asquin for Awabot - May 2018
+paul.asquin@gmail.com
 
 ## Installation
 
