@@ -7,19 +7,21 @@ Project by Paul Asquin for Awabot - May 2018
 paul.asquin@gmail.com
 
 ## Installation
-
 ```
 cd ~
 mkdir catkin_ws_buggy
 cd catkin_ws_buggy
 git clone https://bitbucket.org/awabot/buggy/src/master/ .
 catkin_make
+echo "source PathTo/catkin_ws_buggy/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
+
 ## Usage
 ```
 rosrun buggy buggy_node.py
 ```
-You have to remap your application to the /buggy/* topics.
+You have to remap your application to /buggy/* topics.
 
  ## Preview
 
