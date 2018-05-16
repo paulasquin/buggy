@@ -13,7 +13,7 @@ mkdir catkin_ws_buggy
 cd catkin_ws_buggy
 git clone https://bitbucket.org/awabot/buggy/src/master/ .
 catkin_make
-echo "source PathTo/catkin_ws_buggy/devel/setup.bash" >> ~/.bashrc
+echo "source ~/catkin_ws_buggy/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
