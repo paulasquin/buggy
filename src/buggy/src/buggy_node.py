@@ -12,18 +12,8 @@ import subprocess
 import threading 
 import time
 
-# Initialize the node with rospy
-rospy.init_node('buggy_node')
-# Create publisher
-les_topics_state = []
-window = Tk()
-buggy_prefix = "/buggy"
-publish_flag = True
-
-les_sub = []
-les_pub = []
-les_msgs = []
-les_seq = []
+DISP_RATE = 0.5
+PUBLISH_RATE = 3.0
 
 WHITE_LIST_TOPICS = [	
 					'/camera/depth/camera_info'
@@ -41,6 +31,20 @@ WHITE_LIST_TOPICS = [
 
 # Set topics to ignore
 IGNORED_TOPICS = ['/submap_list', '/scan_matched_points2']
+
+# Initialize the node with rospy
+rospy.init_node('buggy_node')
+# Create publisher
+les_topics_state = []
+window = Tk()
+buggy_prefix = "/buggy"
+publish_flag = True
+
+les_sub = []
+les_pub = []
+les_msgs = []
+les_seq = []
+
 
 # Define Timer callback
 def callback(event):
@@ -76,11 +80,8 @@ def publish():
 	#pub_period = rospy.get_param("~pub_period", 1.0)
 	# Create timer
 	#rospy.Timer(rospy.Duration.from_sec(pub_period), callback)
-	
-	# Not published print timer set to 0.5 sec
-	disp_rate = 0.5
-	publish_rate = 3.0 #10Hz (0.1s)
-	last_print = time.time()-disp_rate
+
+	last_print = time.time()-DISP_RATE
 	last_publish = 0
 
 	while publish_flag:
@@ -94,20 +95,19 @@ def publish():
 					les_pub[i].publish(les_msgs[i])
 				continue
 			if les_topics_state[i][1].get() == 1 and les_msgs[i]!= None and seq > les_seq[i]:
-				#Test for decreasing odom publish rate
-				#if "odom" not in les_topics_state[i][0]:
-				if True:
+				#Test for decreasing odom publish rate. If DO_RATE == False, we publish each time. If not, we publish only after the rate time
+				if DO_RATE == False or "odom" not in les_topics_state[i][0]:
 					les_pub[i].publish(les_msgs[i])
 					les_seq[i] = seq
-				elif last_publish + publish_rate < time.time(): #If odom but we waited enought time for another publish
-					print("Publising odom at rate : " + str(publish_rate) + " sec")
+				elif last_publish + PUBLISH_RATE < time.time(): #If odom and we waited enought time for another publish
+					print("Publising odom at rate : " + str(PUBLISH_RATE) + " sec")
 					last_publish = time.time()
 					les_pub[i].publish(les_msgs[i])
 					les_seq[i] = seq
 
 			elif les_topics_state[i][1].get() == 0:
 				not_published += buggy_prefix + str(les_topics_state[i][0]) + "\n"
-		if not_published != "" and time.time() > last_print + disp_rate:
+		if not_published != "" and time.time() > last_print + DISP_RATE:
 			print("freezing : \n" + not_published)
 			last_print = time.time()
 
